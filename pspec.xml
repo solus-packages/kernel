@@ -27,6 +27,13 @@
             <Dependency>perl</Dependency>
             <Dependency>lz4</Dependency>
         </BuildDependencies>
+
+        <Patches>
+            <Patch level="1">security/cve-2015-4001.patch</Patch>
+            <Patch level="1">security/cve-2015-4002.patch</Patch>
+            <Patch level="1">security/cve-2015-4003.patch</Patch>
+            <Patch level="1">security/cve-2015-4004.patch</Patch>
+        </Patches>
     </Source>
 
     <Package>
