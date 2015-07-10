@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-KVERSION = "4.1.1"
+KVERSION = "4.1.2"
 
 from pisi.actionsapi import kerneltools
 from pisi.actionsapi import shelltools
