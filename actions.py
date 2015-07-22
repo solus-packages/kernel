@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-KVERSION = "4.1.2"
+KVERSION = "4.1.3"
 
 from pisi.actionsapi import kerneltools
 from pisi.actionsapi import shelltools
@@ -12,7 +12,7 @@ from pisi.actionsapi import get
 NoStrip = ["/boot"]
 
 shelltools.export("KBUILD_BUILD_USER", "solus")
-shelltools.export("KBUILD_BUILD_HOST", "beta2")
+shelltools.export("KBUILD_BUILD_HOST", "solus")
 shelltools.export("PYTHONDONTWRITEBYTECODE", "1")
 shelltools.export("HOME", get.workDIR())
 
