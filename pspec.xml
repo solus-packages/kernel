@@ -35,6 +35,9 @@
             <Patch level="1">bfq/0003-block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r8-for-4.1.0.patch</Patch>
 
             <Patch level="1">security/CVE-2015-5257.patch</Patch>
+            <Patch level="1">security/CVE-2015-5156.patch</Patch>
+            <Patch level="1">security/CVE-2015-6937.patch</Patch>
+            <Patch level="1">security/CVE-2015-7613.patch</Patch>
         </Patches>
     </Source>
 
@@ -83,6 +86,17 @@
     </Package>
 
     <History>
+        <Update release="82" type="security">
+            <Date>10-20-2015</Date>
+            <Version>4.1.10</Version>
+            <Comment>Address multiple CVEs</Comment>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="81" type="security">
             <Date>10-17-2015</Date>
             <Version>4.1.10</Version>
