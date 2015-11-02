@@ -1,22 +1,8 @@
-@@ -, +, @@ 
-    drm/nouveau/kms/nv04-nv40: fix pageflip events via special case.
-    drm/irq: Make pipe unsigned and name consistent
-- Open-code the old behaviour, which just enshrines this slight
-  breakage of the userspace ABI.
-- Revert Mario's commit and again inflict broken timestamps, again not
-  pretty.
-- Fix this for real by delaying the pageflip TS until the next vblank
-  interrupt, thereby making it accurate.
----
--Daniel
----
- drivers/gpu/drm/drm_irq.c                 | 56 ++++++++++++++++++++++++++++++-
- drivers/gpu/drm/nouveau/nouveau_display.c | 16 ++++-----
- include/drm/drmP.h                        |  4 +++
- 3 files changed, 66 insertions(+), 10 deletions(-)
---- a/drivers/gpu/drm/drm_irq.c	
-+++ a/drivers/gpu/drm/drm_irq.c	
-@@ -972,7 +972,8 @@ static void send_vblank_event(struct drm_device *dev,
+diff --git a/drivers/gpu/drm/drm_irq.c b/drivers/gpu/drm/drm_irq.c
+index 22d207e..43177fb 100644
+--- a/drivers/gpu/drm/drm_irq.c
++++ b/drivers/gpu/drm/drm_irq.c
+@@ -944,7 +944,8 @@ static void send_vblank_event(struct drm_device *dev,
  		struct drm_pending_vblank_event *e,
  		unsigned long seq, struct timeval *now)
  {
@@ -26,7 +12,7 @@
  	e->event.sequence = seq;
  	e->event.tv_sec = now->tv_sec;
  	e->event.tv_usec = now->tv_usec;
-@@ -985,6 +986,59 @@ static void send_vblank_event(struct drm_device *dev,
+@@ -957,6 +958,59 @@ static void send_vblank_event(struct drm_device *dev,
  }
  
  /**
@@ -86,9 +72,11 @@
   * drm_send_vblank_event - helper to send vblank event after pageflip
   * @dev: DRM device
   * @pipe: CRTC index
---- a/drivers/gpu/drm/nouveau/nouveau_display.c	
-+++ a/drivers/gpu/drm/nouveau/nouveau_display.c	
-@@ -826,7 +826,6 @@ nouveau_finish_page_flip(struct nouveau_channel *chan,
+diff --git a/drivers/gpu/drm/nouveau/nouveau_display.c b/drivers/gpu/drm/nouveau/nouveau_display.c
+index e905c00..5fc05db 100644
+--- a/drivers/gpu/drm/nouveau/nouveau_display.c
++++ b/drivers/gpu/drm/nouveau/nouveau_display.c
+@@ -827,7 +827,6 @@ nouveau_finish_page_flip(struct nouveau_channel *chan,
  	struct drm_device *dev = drm->dev;
  	struct nouveau_page_flip_state *s;
  	unsigned long flags;
@@ -96,7 +84,7 @@
  
  	spin_lock_irqsave(&dev->event_lock, flags);
  
-@@ -838,16 +837,15 @@ nouveau_finish_page_flip(struct nouveau_channel *chan,
+@@ -839,16 +838,15 @@ nouveau_finish_page_flip(struct nouveau_channel *chan,
  
  	s = list_first_entry(&fctx->flip, struct nouveau_page_flip_state, head);
  	if (s->event) {
@@ -120,9 +108,11 @@
  	list_del(&s->head);
  	if (ps)
  		*ps = *s;
---- a/include/drm/drmP.h	
-+++ a/include/drm/drmP.h	
-@@ -948,6 +948,10 @@ extern void drm_send_vblank_event(struct drm_device *dev, unsigned int pipe,
+diff --git a/include/drm/drmP.h b/include/drm/drmP.h
+index 8b5ce7c..ec04dc2 100644
+--- a/include/drm/drmP.h
++++ b/include/drm/drmP.h
+@@ -932,6 +932,12 @@ extern void drm_send_vblank_event(struct drm_device *dev, unsigned int pipe,
  				  struct drm_pending_vblank_event *e);
  extern void drm_crtc_send_vblank_event(struct drm_crtc *crtc,
  				       struct drm_pending_vblank_event *e);
@@ -130,7 +120,8 @@
 +			   struct drm_pending_vblank_event *e);
 +void drm_crtc_send_vblank_event(struct drm_crtc *crtc,
 +				struct drm_pending_vblank_event *e);
++void drm_arm_vblank_event(struct drm_device *dev, unsigned int pipe,
++			  struct drm_pending_vblank_event *e)
  extern bool drm_handle_vblank(struct drm_device *dev, unsigned int pipe);
  extern bool drm_crtc_handle_vblank(struct drm_crtc *crtc);
  extern int drm_vblank_get(struct drm_device *dev, unsigned int pipe);
--- 
