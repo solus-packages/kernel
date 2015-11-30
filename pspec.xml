@@ -10,7 +10,7 @@
         <Summary>Linux Kernel</Summary>
         <Description>This package contains the binary image of the Linux kernel, required to use the operating system</Description>
         <License>GPLv3+</License>
-        <Archive sha1sum="41455864a45728b7a55ea025b6e556e72bf37e69" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.13.tar.gz</Archive>
+        <Archive sha1sum="309d9bedd8c9ef4a79695f04dcf65c0b551d784c" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.3.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -30,12 +30,13 @@
 
         
         <Patches>
-            <Patch level="1">bfq/0001-block-cgroups-kconfig-build-bits-for-BFQ-v7r8-4.1.patch</Patch>
-            <Patch level="1">bfq/0002-block-introduce-the-BFQ-v7r8-I-O-sched-for-4.1.patch</Patch>
-            <Patch level="1">bfq/0003-block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r8-for-4.1.0.patch</Patch>
+            <Patch level="1">bfq/0001-block-cgroups-kconfig-build-bits-for-BFQ-v7r8-4.3.patch</Patch>
+            <Patch level="1">bfq/0002-block-introduce-the-BFQ-v7r8-I-O-sched-for-4.3.patch</Patch>
+            <Patch level="1">bfq/0003-block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r8-for-4.3.0.patch</Patch>
 
-            <Patch level="1">security/CVE-2015-5156.patch</Patch>
-            <Patch level="1">security/CVE-2015-6937.patch</Patch>
+            <!-- Ensure legacy nvidia keeps working //-->
+            <Patch level="1">nvidia/nv-drm-vblank.patch</Patch>
+            <Patch level="1" reverse="true">nvidia/remove-kernel-internal-mtrr-interfaces.patch</Patch>
         </Patches>
     </Source>
 
@@ -43,7 +44,7 @@
         <Name>kernel</Name>
         <Files>
             <Path fileType="executable">/boot</Path>
-            <Path fileType="config">/etc</Path>
+            <Path fileType="config">/etc/kernel</Path>
         </Files>
     </Package>
 
@@ -73,6 +74,7 @@
         <Description>Modules required by the kernel to utilitse the many parts of the computer</Description>
         <Files>
             <Path fileType="library">/lib/modules</Path>
+            <Path fileType="library">/etc/modprobe.d/nouveau.conf</Path>
         </Files>
         <Provides>
             <COMAR script="package.py">System.Package</COMAR>
@@ -81,9 +83,20 @@
             <Dependency release="current">kernel</Dependency>
             <Dependency releaseFrom="9">dracut</Dependency>
         </RuntimeDependencies>
+        <AdditionalFiles>
+            <AdditionalFile permission="0644" target="/etc/modprobe.d/nouveau.conf">nvidia/nouveau.conf</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <History>
+        <Update release="92">
+            <Date>11-30-2015</Date>
+            <Version>4.3.0</Version>
+            <Comment>Update to 4.3.0 kernel</Comment>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="91">
             <Date>11-28-2015</Date>
             <Version>4.1.13</Version>
