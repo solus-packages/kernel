@@ -10,7 +10,7 @@
         <Summary>Linux Kernel</Summary>
         <Description>This package contains the binary image of the Linux kernel, required to use the operating system</Description>
         <License>GPLv3+</License>
-        <Archive sha1sum="41455864a45728b7a55ea025b6e556e72bf37e69" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.13.tar.gz</Archive>
+        <Archive sha1sum="20d40a4a8a54593d1638965e59dc0bf15a11ef25" type="targz">https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.1.14.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -37,8 +37,6 @@
             
             <Patch level="1">linux-2.6-intel-iommu-igfx.patch</Patch>
             <Patch level="1">lz4.patch</Patch>
-            <Patch level="1">security/CVE-2015-5156.patch</Patch>
-            <Patch level="1">security/CVE-2015-6937.patch</Patch>
         </Patches>
     </Source>
 
@@ -87,6 +85,14 @@
     </Package>
 
     <History>
+        <Update release="99">
+            <Date>12-10-2015</Date>
+            <Version>4.1.14</Version>
+            <Comment>Update to 4.1.14</Comment>
+            <Name>Justin Zobel</Name>
+            <Email>justin@solus-project.com</Email>
+        </Update>
+
         <Update release="98">
             <Date>12-04-2015</Date>
             <Version>4.1.13</Version>
