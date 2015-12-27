@@ -10,7 +10,7 @@
         <Summary>Linux Kernel</Summary>
         <Description>This package contains the binary image of the Linux kernel, required to use the operating system</Description>
         <License>GPLv3+</License>
-        <Archive sha1sum="a7085da03dea92515998e7cc3a1dcbbfb4f9bcbd" type="targz">https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.1.15.tar.gz</Archive>
+        <Archive sha1sum="d0b987804ac7db3de38c2ab1c164f1ab227cad0a" type="targz">https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.3.3.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -30,13 +30,15 @@
 
         
         <Patches>
-            <Patch level="1">bfq/0001-block-cgroups-kconfig-build-bits-for-BFQ-v7r8-4.1.patch</Patch>
-            <Patch level="1">bfq/0002-block-introduce-the-BFQ-v7r8-I-O-sched-for-4.1.patch</Patch>
-            <Patch level="1">bfq/0003-block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r8-for-4.1.0.patch</Patch>
+            <Patch level="1">bfq/0001-block-cgroups-kconfig-build-bits-for-BFQ-v7r8-4.3.patch</Patch>
+            <Patch level="1">bfq/0002-block-introduce-the-BFQ-v7r8-I-O-sched-for-4.3.patch</Patch>
+            <Patch level="1">bfq/0003-block-bfq-add-Early-Queue-Merge-EQM-to-BFQ-v7r8-for-4.3.0.patch</Patch>
 
-            
+            <!-- Ensure legacy nvidia keeps working //-->
+            <Patch level="1">nvidia/nv-drm-vblank.patch</Patch>
+            <Patch level="1" reverse="true">nvidia/remove-kernel-internal-mtrr-interfaces.patch</Patch>
+
             <Patch level="1">linux-2.6-intel-iommu-igfx.patch</Patch>
-            <Patch level="1">lz4.patch</Patch>
         </Patches>
     </Source>
 
@@ -82,6 +84,9 @@
             <Dependency release="current">kernel</Dependency>
             <Dependency releaseFrom="9">dracut</Dependency>
         </RuntimeDependencies>
+        <AdditionalFiles>
+            <AdditionalFile permission="0644" target="/etc/modprobe.d/nouveau.conf">nvidia/nouveau.conf</AdditionalFile>
+        </AdditionalFiles>
     </Package>
 
     <History>
