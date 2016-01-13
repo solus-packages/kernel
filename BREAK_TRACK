@@ -1,0 +1,84 @@
+commit 4938c0386768525612c75a3cf647a77a10be4dbd
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Mon Aug 17 16:48:42 2015 +0100
+
+    Update to latest LTS release, 4.1.6
+
+
+commit 067d4ee3ce0442e472d5c824cd48bd59c146e62b
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Sat Aug 22 00:48:10 2015 +0100
+
+    Rebuild against newer GCC, enable F2FS
+
+commit 0ecb481704e19f148661bc75fc3f85fc33e60bf7
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Sat Aug 22 05:57:32 2015 +0100
+
+    Build-in more disk-related modules so we can begin deprecation of initrd
+    
+    Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+
+commit 426255034cc5105308f4ec20d1b347bfd549dd22
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Sat Oct 3 20:41:21 2015 +0100
+
+    Update to latest LTS release, 4.1.10
+    
+    Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+
+commit 4e5aac9ea3a7e7bc65e2983ab24ad65e32ee3586
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Wed Sep 23 01:03:24 2015 +0100
+
+    Update to latest LTS, 4.1.8
+    
+    Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+
+commit 9997c7560433b6691c7502503ba6e188d6e2b405
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Sat Oct 17 23:45:10 2015 +0100
+
+    Address CVE-2015-5257
+    
+    Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+
+commit 10a8e5b8c420074c506c8cdcda47db79f6d1edef
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Sun Oct 11 19:52:39 2015 +0100
+
+    Switch SLAB to SLUB, kill floppy driver with fire
+    
+    Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+
+commit b2203d7ba01e1ee1b865da1cad73ef4773c1a20c
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Sat Oct 24 17:43:39 2015 +0100
+
+    Update to 4.1.11 kernel, dropping integrated patches
+    
+    Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+
+commit 88e0b510a3958dc8ff2f19b70be231a4254dabca
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Tue Oct 20 17:17:37 2015 +0100
+
+    Address multiple CVEs
+    
+    Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+
+commit 5db7d97193ec6b109aa5509fec6dcfe2135fb3d7
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Sat Oct 31 20:46:55 2015 +0000
+
+    Hopefully enable trackpoint and other such wonders
+    
+    Signed-off-by: Ikey Doherty <ikey@solus-project.com>
+
+commit 1277cb7a89bee12e95937a6f93272a9a674d026b
+Author: Ikey Doherty <ikey@solus-project.com>
+Date:   Sat Oct 31 15:03:40 2015 +0000
+
+    Update to 4.1.12
+    
+    Signed-off-by: Ikey Doherty <ikey@solus-project.com>
