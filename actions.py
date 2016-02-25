@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-KVERSION = "4.4.2"
+KVERSION = "4.4.3"
 
 from pisi.actionsapi import kerneltools
 from pisi.actionsapi import shelltools
@@ -12,11 +12,9 @@ from pisi.actionsapi import get
 NoStrip = ["/boot"]
 
 shelltools.export("KBUILD_BUILD_USER", "solus")
-shelltools.export("KBUILD_BUILD_HOST", "solus")
+shelltools.export("KBUILD_BUILD_HOST", "toadstool")
 shelltools.export("PYTHONDONTWRITEBYTECODE", "1")
 shelltools.export("HOME", get.workDIR())
-
-cpupower_arch = get.ARCH().replace("i686", "i386")
 
 def setup():
     kerneltools.configure()
@@ -34,9 +32,9 @@ def install():
 
     # Install kernel headers needed for out-of-tree module compilation
     kerneltools.installHeaders()
-
     kerneltools.installLibcHeaders()
-
 
     # Generate some module lists to use within mkinitramfs
     shelltools.system("./generate-module-list %s/lib/modules/%s" % (get.installDIR(), kerneltools.__getSuffix()))
+
+    shelltools.system("ln -sv boot/kernel-%s %s/vmlinuz" % (KVERSION, get.installDIR()))
