@@ -1,7 +1,7 @@
-From 8a3e03e4d2c06f9eacf26eb786ccc312dcc2aa8e Mon Sep 17 00:00:00 2001
+From d3deade9dc903f58c2bf79e316b785f6eaf2441f Mon Sep 17 00:00:00 2001
 From: Mauro Andreolini <mauro.andreolini@unimore.it>
 Date: Sun, 6 Sep 2015 16:09:05 +0200
-Subject: [PATCH 3/3] block, bfq: add Early Queue Merge (EQM) to BFQ-v7r10 for
+Subject: [PATCH 3/3] block, bfq: add Early Queue Merge (EQM) to BFQ-v7r11 for
  4.4.0
 
 A set of processes may happen  to  perform interleaved reads, i.e.,requests
@@ -41,18 +41,18 @@ Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
  3 files changed, 743 insertions(+), 14 deletions(-)
 
 diff --git a/block/bfq-cgroup.c b/block/bfq-cgroup.c
-index 707364a..7a61920 100644
+index 8610cd6..5ee99ec 100644
 --- a/block/bfq-cgroup.c
 +++ b/block/bfq-cgroup.c
-@@ -420,6 +420,7 @@ static void bfq_pd_init(struct blkg_policy_data *pd)
+@@ -437,6 +437,7 @@ static void bfq_pd_init(struct blkg_policy_data *pd)
  				   */
  	bfqg->bfqd = bfqd;
  	bfqg->active_entities = 0;
 +	bfqg->rq_pos_tree = RB_ROOT;
+ }
  
- 	/* if the root_group does not exist, we are handling it right now */
- 	if (bfqd->root_group && bfqg != bfqd->root_group)
-@@ -526,6 +527,8 @@ static struct bfq_group *bfq_find_alloc_group(struct bfq_data *bfqd,
+ static void bfq_pd_free(struct blkg_policy_data *pd)
+@@ -530,6 +531,8 @@ static struct bfq_group *bfq_find_alloc_group(struct bfq_data *bfqd,
  	return bfqg;
  }
  
@@ -61,7 +61,7 @@ index 707364a..7a61920 100644
  /**
   * bfq_bfqq_move - migrate @bfqq to @bfqg.
   * @bfqd: queue descriptor.
-@@ -573,6 +576,7 @@ static void bfq_bfqq_move(struct bfq_data *bfqd, struct bfq_queue *bfqq,
+@@ -577,6 +580,7 @@ static void bfq_bfqq_move(struct bfq_data *bfqd, struct bfq_queue *bfqq,
  	bfqg_get(bfqg);
  
  	if (busy) {
@@ -70,7 +70,7 @@ index 707364a..7a61920 100644
  			bfq_activate_bfqq(bfqd, bfqq);
  	}
 diff --git a/block/bfq-iosched.c b/block/bfq-iosched.c
-index d61e402..6f8e52a 100644
+index f9787a6..d1f648d 100644
 --- a/block/bfq-iosched.c
 +++ b/block/bfq-iosched.c
 @@ -296,6 +296,72 @@ static struct request *bfq_choose_req(struct bfq_data *bfqd,
@@ -946,7 +946,7 @@ index d61e402..6f8e52a 100644
  	spin_unlock_irqrestore(q->queue_lock, flags);
  
  	return 0;
-@@ -3289,6 +3945,7 @@ static void bfq_init_root_group(struct bfq_group *root_group,
+@@ -3290,6 +3946,7 @@ static void bfq_init_root_group(struct bfq_group *root_group,
  	root_group->my_entity = NULL;
  	root_group->bfqd = bfqd;
  #endif
@@ -954,7 +954,7 @@ index d61e402..6f8e52a 100644
  	for (i = 0; i < BFQ_IOPRIO_CLASSES; i++)
  		root_group->sched_data.service_tree[i] = BFQ_SERVICE_TREE_INIT;
  }
-@@ -3369,6 +4026,8 @@ static int bfq_init_queue(struct request_queue *q, struct elevator_type *e)
+@@ -3370,6 +4027,8 @@ static int bfq_init_queue(struct request_queue *q, struct elevator_type *e)
  	bfqd->bfq_timeout[BLK_RW_ASYNC] = bfq_timeout_async;
  	bfqd->bfq_timeout[BLK_RW_SYNC] = bfq_timeout_sync;
  
@@ -964,7 +964,7 @@ index d61e402..6f8e52a 100644
  
  	bfqd->bfq_large_burst_thresh = 11;
 diff --git a/block/bfq.h b/block/bfq.h
-index 9b04d19..97a677f 100644
+index 3bb7df2..32dfcee 100644
 --- a/block/bfq.h
 +++ b/block/bfq.h
 @@ -183,6 +183,8 @@ struct bfq_group;
@@ -1020,7 +1020,7 @@ index 9b04d19..97a677f 100644
  };
  
  enum bfq_device_speed {
-@@ -559,6 +591,9 @@ enum bfqq_state_flags {
+@@ -557,6 +589,9 @@ enum bfqq_state_flags {
  					 * may need softrt-next-start
  					 * update
  					 */
@@ -1030,7 +1030,7 @@ index 9b04d19..97a677f 100644
  };
  
  #define BFQ_BFQQ_FNS(name)						\
-@@ -585,6 +620,9 @@ BFQ_BFQQ_FNS(budget_new);
+@@ -583,6 +618,9 @@ BFQ_BFQQ_FNS(budget_new);
  BFQ_BFQQ_FNS(IO_bound);
  BFQ_BFQQ_FNS(in_large_burst);
  BFQ_BFQQ_FNS(constantly_seeky);
@@ -1040,7 +1040,7 @@ index 9b04d19..97a677f 100644
  BFQ_BFQQ_FNS(softrt_update);
  #undef BFQ_BFQQ_FNS
  
-@@ -679,6 +717,9 @@ struct bfq_group_data {
+@@ -675,6 +713,9 @@ struct bfq_group_data {
   *                   are groups with more than one active @bfq_entity
   *                   (see the comments to the function
   *                   bfq_bfqq_must_not_expire()).
@@ -1050,7 +1050,7 @@ index 9b04d19..97a677f 100644
   *
   * Each (device, cgroup) pair has its own bfq_group, i.e., for each cgroup
   * there is a set of bfq_groups, each one collecting the lower-level
-@@ -707,6 +748,8 @@ struct bfq_group {
+@@ -701,6 +742,8 @@ struct bfq_group {
  
  	int active_entities;
  
@@ -1059,7 +1059,7 @@ index 9b04d19..97a677f 100644
  	struct bfqg_stats stats;
  	struct bfqg_stats dead_stats;	/* stats pushed from dead children */
  };
-@@ -717,6 +760,8 @@ struct bfq_group {
+@@ -711,6 +754,8 @@ struct bfq_group {
  
  	struct bfq_queue *async_bfqq[2][IOPRIO_BE_NR];
  	struct bfq_queue *async_idle_bfqq;
@@ -1068,7 +1068,7 @@ index 9b04d19..97a677f 100644
  };
  #endif
  
-@@ -793,6 +838,27 @@ static void bfq_put_bfqd_unlock(struct bfq_data *bfqd, unsigned long *flags)
+@@ -787,6 +832,27 @@ static void bfq_put_bfqd_unlock(struct bfq_data *bfqd, unsigned long *flags)
  	spin_unlock_irqrestore(bfqd->queue->queue_lock, *flags);
  }
  
