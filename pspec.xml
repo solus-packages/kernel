@@ -88,6 +88,17 @@
     </Package>
 
     <History>
+        <Update release="119">
+            <Date>03-16-2016</Date>
+            <Version>4.4.5</Version>
+            <Comment>Ensure we can run static binaries</Comment>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="118">
             <Date>03-11-2016</Date>
             <Version>4.4.5</Version>
