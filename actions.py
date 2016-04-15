@@ -3,11 +3,8 @@
 #
 KVERSION = "4.4.7"
 
-from pisi.actionsapi import kerneltools
-from pisi.actionsapi import shelltools
-from pisi.actionsapi import autotools
-from pisi.actionsapi import pisitools
-from pisi.actionsapi import get
+from pisi.actionsapi import kerneltools, shelltools, autotools, pisitools, get
+import os
 
 NoStrip = ["/boot"]
 
@@ -15,12 +12,24 @@ shelltools.export("KBUILD_BUILD_USER", "solus")
 shelltools.export("KBUILD_BUILD_HOST", "toadstool")
 shelltools.export("PYTHONDONTWRITEBYTECODE", "1")
 shelltools.export("HOME", get.workDIR())
+cached_jobs = get.makeJOBS()
+
+def drop_jobs():
+    if "JOBS" in os.environ:
+        del os.environ["JOBS"]
+
+def set_jobs():
+    global cached_jobs
+    os.environ["JOBS"] = cached_jobs
 
 def setup():
     kerneltools.configure()
 
 def build():
     kerneltools.build(debugSymbols=False)
+    drop_jobs()
+    shelltools.system("make -C tools/perf")
+    set_jobs()
 
 def install():
     # pisi needs patching to check if the links exist, before it removes them
@@ -38,3 +47,8 @@ def install():
     shelltools.system("./generate-module-list %s/lib/modules/%s" % (get.installDIR(), kerneltools.__getSuffix()))
 
     shelltools.system("ln -sv boot/kernel-%s %s/vmlinuz" % (KVERSION, get.installDIR()))
+
+    # install perf, etc
+    drop_jobs()
+    shelltools.system("make -C tools/perf install DESTDIR=%s prefix=/usr" % get.installDIR())
+    set_jobs()
