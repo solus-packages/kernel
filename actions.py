@@ -27,9 +27,9 @@ def setup():
 
 def build():
     kerneltools.build(debugSymbols=False)
-    drop_jobs()
-    shelltools.system("make -C tools/perf")
-    set_jobs()
+    # drop_jobs()
+    # shelltools.system("make -C tools/perf")
+    # set_jobs()
 
 def install():
     # pisi needs patching to check if the links exist, before it removes them
@@ -48,7 +48,7 @@ def install():
 
     shelltools.system("ln -sv boot/kernel-%s %s/vmlinuz" % (KVERSION, get.installDIR()))
 
-    # install perf, etc
-    drop_jobs()
-    shelltools.system("make -C tools/perf install DESTDIR=%s prefix=/usr" % get.installDIR())
-    set_jobs()
+    # Perl build failure, investigate
+    # drop_jobs()
+    # shelltools.system("make -C tools/perf install DESTDIR=%s prefix=/usr" % get.installDIR())
+    # set_jobs()
