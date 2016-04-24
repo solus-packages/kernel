@@ -10,7 +10,7 @@
         <Summary>Linux Kernel</Summary>
         <Description>This package contains the binary image of the Linux kernel, required to use the operating system</Description>
         <License>GPL-2.0</License>
-        <Archive sha1sum="0dff11c24ad5d86a36441e99bfcae169a8003f56" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.4.7.tar.gz</Archive>
+        <Archive sha1sum="e19035470d37dadda334116e12ca32835c9387f2" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.4.8.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -104,6 +104,14 @@
     </Package>
 
     <History>
+        <Update release="127">
+            <Date>04-24-2016</Date>
+            <Version>4.4.8</Version>
+            <Comment>Update to latest LTS version</Comment>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="126">
             <Date>04-20-2016</Date>
             <Version>4.4.7</Version>
