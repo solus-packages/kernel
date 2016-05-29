@@ -39,6 +39,8 @@
             <Patch level="1" reverse="true">nvidia/remove-kernel-internal-mtrr-interfaces.patch</Patch>
             <Patch level="1">linux-2.6-intel-iommu-igfx.patch</Patch>
             <Patch level="1">overload-on-wakeup.patch</Patch>
+            <!-- From the Steam OS kernel: https://raw.githubusercontent.com/ValveSoftware/steamos_kernel/brewmaster-4.1/drivers/input/joystick/xpad.c //-->
+            <Patch level="1">gaming/steam_os_xpad.patch</Patch>
         </Patches>
     </Source>
 
@@ -104,6 +106,14 @@
     </Package>
 
     <History>
+        <Update release="133">
+            <Date>05-29-2016</Date>
+            <Version>4.4.11</Version>
+            <Comment>Enable VFIO for VGA, DualShock on Sony, and import Steam's xpad driver</Comment>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="132">
             <Date>05-27-2016</Date>
             <Version>4.4.11</Version>
