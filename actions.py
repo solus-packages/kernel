@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-KVERSION = "4.4.11"
+KVERSION = "4.4.12"
 
 from pisi.actionsapi import kerneltools, shelltools, autotools, pisitools, get
 import os
@@ -27,9 +27,9 @@ def setup():
 
 def build():
     kerneltools.build(debugSymbols=False)
-    # drop_jobs()
-    # shelltools.system("make -C tools/perf")
-    # set_jobs()
+    drop_jobs()
+    shelltools.system("make -C tools/perf WERROR=0")
+    set_jobs()
 
 def install():
     # pisi needs patching to check if the links exist, before it removes them
