@@ -50,5 +50,5 @@ def install():
 
     # kernel-tools
     drop_jobs()
-    shelltools.system("make -C tools/perf install DESTDIR=%s prefix=/usr" % get.installDIR())
+    shelltools.system("make -C tools/perf WERROR=0  install DESTDIR=%s prefix=/usr" % get.installDIR())
     set_jobs()
