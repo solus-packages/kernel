@@ -48,7 +48,7 @@ def install():
 
     shelltools.system("ln -sv boot/kernel-%s %s/vmlinuz" % (KVERSION, get.installDIR()))
 
-    # Perl build failure, investigate
-    # drop_jobs()
-    # shelltools.system("make -C tools/perf install DESTDIR=%s prefix=/usr" % get.installDIR())
-    # set_jobs()
+    # kernel-tools
+    drop_jobs()
+    shelltools.system("make -C tools/perf install DESTDIR=%s prefix=/usr" % get.installDIR())
+    set_jobs()
