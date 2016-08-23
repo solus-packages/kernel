@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-KVERSION = "4.7.0"
+KVERSION = "4.7.2"
 
 from pisi.actionsapi import kerneltools, shelltools, autotools, pisitools, get
 import os
