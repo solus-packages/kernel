@@ -104,6 +104,17 @@
     </Package>
 
     <History>
+        <Update release="151">
+            <Date>09-19-2016</Date>
+            <Version>4.7.4</Version>
+            <Comment>Move to voluntary-preempt, enable BPF JIT, other micro-optimisations</Comment>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="150">
             <Date>09-15-2016</Date>
             <Version>4.7.4</Version>
