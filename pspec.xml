@@ -104,6 +104,17 @@
     </Package>
 
     <History>
+        <Update release="154">
+            <Date>09-25-2016</Date>
+            <Version>4.7.5</Version>
+            <Comment>Enable B43 N generation</Comment>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="153">
             <Date>09-24-2016</Date>
             <Version>4.7.5</Version>
