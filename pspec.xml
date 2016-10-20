@@ -104,6 +104,17 @@
     </Package>
 
     <History>
+        <Update release="159" type="security">
+            <Date>10-20-2016</Date>
+            <Version>4.8.3</Version>
+            <Comment>Address CVE-2016-5195</Comment>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="158">
             <Date>10-20-2016</Date>
             <Version>4.8.3</Version>
