@@ -10,7 +10,7 @@
         <Summary>Linux Kernel</Summary>
         <Description>This package contains the binary image of the Linux kernel, required to use the operating system</Description>
         <License>GPL-2.0</License>
-        <Archive sha1sum="6ee0fcd4a3eb5c3bd56b8884d6ebe713ed3146d6" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.8.2.tar.gz</Archive>
+        <Archive sha1sum="c6db5bb061deccc9d973788cc5c5eaf8d02f8311" type="targz">https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.8.3.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -104,6 +104,14 @@
     </Package>
 
     <History>
+        <Update release="158">
+            <Date>10-20-2016</Date>
+            <Version>4.8.3</Version>
+            <Comment>Update to 4.8.3</Comment>
+            <Name>Justin Zobel</Name>
+            <Email>justin@solus-project.com</Email>
+        </Update>
+
         <Update release="157">
             <Date>10-16-2016</Date>
             <Version>4.8.2</Version>
