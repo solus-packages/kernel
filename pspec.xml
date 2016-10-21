@@ -104,6 +104,17 @@
     </Package>
 
     <History>
+        <Update release="160">
+            <Date>10-21-2016</Date>
+            <Version>4.8.3</Version>
+            <Comment>Enabled Huion Graphics Tablets per SP881</Comment>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Joshua Strobl</Name>
+            <Email>joshua@stroblindustries.com</Email>
+        </Update>
+
         <Update release="159" type="security">
             <Date>10-20-2016</Date>
             <Version>4.8.3</Version>
