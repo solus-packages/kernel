@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 4.8.4 Kernel Configuration
+# Linux/x86 4.8.5 Kernel Configuration
 #
 CONFIG_64BIT=y
 CONFIG_X86_64=y
@@ -4671,7 +4671,7 @@ CONFIG_HID_BELKIN=m
 # CONFIG_HID_BETOP_FF is not set
 CONFIG_HID_CHERRY=m
 CONFIG_HID_CHICONY=m
-# CONFIG_HID_CORSAIR is not set
+CONFIG_HID_CORSAIR=m
 # CONFIG_HID_PRODIKEYS is not set
 CONFIG_HID_CMEDIA=m
 # CONFIG_HID_CP2112 is not set
