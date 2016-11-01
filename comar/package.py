@@ -2,7 +2,7 @@
 import os
 import shutil
 
-KernelVersion = "4.8.5"
+KernelVersion = "4.8.6"
 
 def postInstall(fromVersion, fromRelease, toVersion, toRelease):
     # Must run depmod to keep the modules up to date :)

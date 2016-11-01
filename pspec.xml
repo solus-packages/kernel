@@ -10,7 +10,7 @@
         <Summary>Linux Kernel</Summary>
         <Description>This package contains the binary image of the Linux kernel, required to use the operating system</Description>
         <License>GPL-2.0</License>
-        <Archive sha1sum="85eeac1a230e482312e004b97a78899a827ad500" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.8.5.tar.gz</Archive>
+        <Archive sha1sum="717131bc9fac61ea1ead79b546bf268a7d2cb29b" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.8.6.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -104,6 +104,14 @@
     </Package>
 
     <History>
+        <Update release="163">
+            <Date>11-01-2016</Date>
+            <Version>4.8.6</Version>
+            <Comment>Update to 4.8.6</Comment>
+            <Name>Joshua Strobl</Name>
+            <Email>joshua@stroblindustries.com</Email>
+        </Update>
+
         <Update release="162">
             <Date>10-30-2016</Date>
             <Version>4.8.5</Version>
