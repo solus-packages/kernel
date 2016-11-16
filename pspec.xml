@@ -10,7 +10,7 @@
         <Summary>Linux Kernel</Summary>
         <Description>This package contains the binary image of the Linux kernel, required to use the operating system</Description>
         <License>GPL-2.0</License>
-        <Archive sha1sum="64638ace1e980f184118a2efecf14f61cecea294" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.8.7.tar.gz</Archive>
+        <Archive sha1sum="11a283dc083fb8c65aa724f230e21f86bea56b09" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.8.8.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -104,6 +104,20 @@
     </Package>
 
     <History>
+        <Update release="165">
+            <Date>11-16-2016</Date>
+            <Version>4.8.8</Version>
+            <Comment>Update to the 4.8.8 kernel
+
+Also fix encryption options and enable SOC Audio
+</Comment>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="164">
             <Date>11-10-2016</Date>
             <Version>4.8.7</Version>
