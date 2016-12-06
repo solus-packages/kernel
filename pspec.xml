@@ -32,9 +32,6 @@
             <Dependency type="pkgconfig">libunwind</Dependency>
         </BuildDependencies>
 
-        <BuildFlags>
-            <Flag>noDebug</Flag>
-        </BuildFlags>
         <Patches>
             <Patch level="1">linux-2.6-intel-iommu-igfx.patch</Patch>
             <Patch level="1">overload-on-wakeup.patch</Patch>
@@ -43,6 +40,9 @@
 
     <Package>
         <Name>kernel</Name>
+        <BuildFlags>
+            <Flag>noDebug</Flag>
+        </BuildFlags>
         <Files>
             <Path fileType="executable">/boot</Path>
             <Path fileType="executable">/vmlinuz</Path>
@@ -52,6 +52,9 @@
 
     <Package>
         <Name>kernel-libc-devel</Name>
+        <BuildFlags>
+            <Flag>noDebug</Flag>
+        </BuildFlags>
         <Summary>klibc headers</Summary>
         <Description>Kernel's libc headers</Description>
         <Files>
@@ -62,6 +65,9 @@
 
     <Package>
         <Name>kernel-headers</Name>
+        <BuildFlags>
+            <Flag>noDebug</Flag>
+        </BuildFlags>
         <Summary>Headers required to build modules</Summary>
         <Description>Header files used to build modules, such as video drivers</Description>
         <Files>
@@ -72,6 +78,9 @@
 
     <Package>
         <Name>kernel-modules</Name>
+        <BuildFlags>
+            <Flag>noDebug</Flag>
+        </BuildFlags>
         <Summary>Modules required to use functions of the computer</Summary>
         <Description>Modules required by the kernel to utilitse the many parts of the computer</Description>
         <Files>
@@ -91,6 +100,9 @@
 
     <Package>
         <Name>kernel-tools</Name>
+        <BuildFlags>
+            <Flag>noDebug</Flag>
+        </BuildFlags>
         <PartOf>programming.tools</PartOf>
         <Summary>Useful kernel development tools such as 'perf'</Summary>
         <Description>Useful kernel development tools such as 'perf'</Description>
