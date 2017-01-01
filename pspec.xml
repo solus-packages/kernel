@@ -35,7 +35,6 @@
         <Patches>
             <Patch level="1">linux-2.6-intel-iommu-igfx.patch</Patch>
             <Patch level="1">overload-on-wakeup.patch</Patch>
-            <Patch level="1">security/cve-2016-6213.patch</Patch>
             <Patch level="1">security/cve-2016-9775.patch</Patch>
         </Patches>
     </Source>
@@ -118,6 +117,14 @@
     </Package>
 
     <History>
+        <Update release="175">
+            <Date>01-01-2017</Date>
+            <Version>4.8.15</Version>
+            <Comment>Drop one broken patch</Comment>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="174" type="security">
             <Date>01-01-2017</Date>
             <Version>4.8.15</Version>
