@@ -10,7 +10,7 @@
         <Summary>Linux Kernel</Summary>
         <Description>This package contains the binary image of the Linux kernel, required to use the operating system</Description>
         <License>GPL-2.0</License>
-        <Archive sha1sum="100b6fad427aae9ec6f73d69113b044114db14b4" type="targz">https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.9.8.tar.gz</Archive>
+        <Archive sha1sum="93e6c7529380eb1a25559735c2a02b0d41eb30dd" type="targz">https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.9.10.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -87,6 +87,17 @@
     </Package>
 
     <History>
+        <Update release="181">
+            <Date>02-17-2017</Date>
+            <Version>4.9.10</Version>
+            <Comment>Update to latest LTS release</Comment>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="180">
             <Date>02-04-2017</Date>
             <Version>4.9.8</Version>
