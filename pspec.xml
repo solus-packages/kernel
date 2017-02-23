@@ -10,7 +10,7 @@
         <Summary>Linux Kernel</Summary>
         <Description>This package contains the binary image of the Linux kernel, required to use the operating system</Description>
         <License>GPL-2.0</License>
-        <Archive sha1sum="93e6c7529380eb1a25559735c2a02b0d41eb30dd" type="targz">https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.9.10.tar.gz</Archive>
+        <Archive sha1sum="f1040d00ca7354f01c48bb690fff0a20df8d4ee6" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.12.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -35,7 +35,7 @@
         <Patches>
             <Patch level="1">linux-2.6-intel-iommu-igfx.patch</Patch>
             <Patch level="1">overload-on-wakeup.patch</Patch>
-            <Patch level="1">revert-rtl.patch</Patch>
+            <Patch level="1">security/cve-2017-6074.patch</Patch>
         </Patches>
     </Source>
 
@@ -87,6 +87,17 @@
     </Package>
 
     <History>
+        <Update release="182" type="security">
+            <Date>02-23-2017</Date>
+            <Version>4.9.12</Version>
+            <Comment>Update to 4.9.12 and address CVE-2017-6074</Comment>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="181">
             <Date>02-17-2017</Date>
             <Version>4.9.10</Version>
