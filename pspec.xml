@@ -10,7 +10,7 @@
         <Summary>Linux Kernel</Summary>
         <Description>This package contains the binary image of the Linux kernel, required to use the operating system</Description>
         <License>GPL-2.0</License>
-        <Archive sha1sum="fdd62cd0ed798f5b1f639e8201e9a03d2276dcf3" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.13.tar.gz</Archive>
+        <Archive sha1sum="81f08e0b0c6e9488c27ea29f9f621d8b107fa776" type="targz">https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.9.16.tar.gz</Archive>
         <AdditionalFiles>
             <AdditionalFile target="configs/kernel-i686-config">configs/kernel-i686-config</AdditionalFile>
             <AdditionalFile target="configs/kernel-x86_64-config">configs/kernel-x86_64-config</AdditionalFile>
@@ -35,7 +35,6 @@
         <Patches>
             <Patch level="1">linux-2.6-intel-iommu-igfx.patch</Patch>
             <Patch level="1">overload-on-wakeup.patch</Patch>
-            <Patch level="1">security/cve-2017-5669.patch</Patch>
         </Patches>
     </Source>
 
@@ -87,6 +86,17 @@
     </Package>
 
     <History>
+        <Update release="186">
+            <Date>03-19-2017</Date>
+            <Version>4.9.16</Version>
+            <Comment>Update to latest LTS release</Comment>
+            <Requires>
+                <Action package="kernel">systemRestart</Action>
+            </Requires>
+            <Name>Ikey Doherty</Name>
+            <Email>ikey@solus-project.com</Email>
+        </Update>
+
         <Update release="185" type="security">
             <Date>03-04-2017</Date>
             <Version>4.9.13</Version>
